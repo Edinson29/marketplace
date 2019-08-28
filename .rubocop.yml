@@ -1,0 +1,7 @@
+# .rubocop.yml
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'config/**/*'
+    - 'spec/**/*'
+  TargetRubyVersion: 2.6.3
