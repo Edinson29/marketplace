@@ -18,7 +18,7 @@ gem 'uglifier', '>= 1.3.0'
 
 # Gems added during the project
 gem 'pg', '~> 1.1', '>= 1.1.4'
-gem 'rubocop', require: false
+gem 'rubocop', '~> 0.74.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
