@@ -20,6 +20,7 @@ gem 'rubocop', '~> 0.74.0'
 gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails', '~> 4.3'
 gem 'popper_js', '~> 1.14'
+gem 'faker', '~> 2.2'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
