@@ -17,9 +17,9 @@ RSpec.describe UsersController, type: :controller do
   end
 
   describe "GET #create" do
-    it "vale" do
-      post :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', cellphone: 3265565, address: 'chinita' } }
-      expect(subject).to redirect_to assigns(:user)
+    it "returns 302" do
+      get :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', cellphone: 3265565, address: 'chinita' } }
+      expect(response).to have_http_status(302)
     end
   end
 end
