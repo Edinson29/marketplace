@@ -16,10 +16,36 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  describe "GET #create" do
+  describe "POST #create" do
     it "returns 302" do
-      get :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', cellphone: 3265565, address: 'chinita' } }
+      post :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', cellphone: 3265565, address: 'chinita' } }
       expect(response).to have_http_status(302)
+    end
+
+    describe "renders to the action new" do
+      it "renders for first_name empty" do
+        post :create, params: { user: { first_name: '', last_name: 'figueroa', email: 'efigueroa@hotmail.com', cellphone: 3568545, address: 'ciudadela' } }
+        expect(response).to render_template(:new)
+      end
+
+      it "renders for last_name empty" do
+        post :create, params: { user: { first_name: 'efrain', last_name: '', email: 'efrainf@hotmail.com', cellphone: 3568545, address: 'ciudadela' } }
+        expect(response).to render_template(:new)
+      end
+
+      it "renders for email" do
+        post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: '', cellphone: 3568545, address: 'ciudadela' } }
+        expect(response).to render_template(:new)
+      end
+      it "params not included" do
+        post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'happyhappy@gmail.com', date: '2/09/2019', address: 'ciudadela' } }
+        expect(User.last).not_to match(date: '2/09/2019')
+      end
+    end
+
+    it "redirects to @user" do
+      post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'vidachevere@gmail.com', cellphone: 3568545, address: 'ciudadela' } }
+      expect(response).to redirect_to user_path(User.find_by(email: 'vidachevere@gmail.com'))
     end
   end
 end
