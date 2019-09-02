@@ -37,15 +37,17 @@ RSpec.describe UsersController, type: :controller do
         post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: '', cellphone: 3568545, address: 'ciudadela' } }
         expect(response).to render_template(:new)
       end
-      it "params not included" do
-        post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'happyhappy@gmail.com', date: '2/09/2019', address: 'ciudadela' } }
-        expect(User.last).not_to match(date: '2/09/2019')
-      end
     end
 
     it "redirects to @user" do
       post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'vidachevere@gmail.com', cellphone: 3568545, address: 'ciudadela' } }
       expect(response).to redirect_to user_path(User.find_by(email: 'vidachevere@gmail.com'))
+    end
+
+    it "params not included" do
+      date = Date.parse('1955-01-01')
+      post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'happyhappy@gmail.com', cellphone: 325648, address: 'ciudadela', created_at: date } }
+      expect(User.last.created_at.to_date).not_to eq(date)
     end
   end
 end
