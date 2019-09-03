@@ -10,18 +10,18 @@
       <th scope="col">Address</th>
     </tr>
   </thead>
-  <% @users.each do |user| %>
   <tbody>
-    <tr>
-      <th scope="row"><%= user.id %></th>
-      <td><%= user.first_name %></td>
-      <td><%= user.last_name %></td>
-      <td><%= user.email %></td>
-      <td><%= user.cellphone %></td>
-      <td><%= user.address %></td>
-    </tr>
+    <% @users.each do |user| %>
+      <tr>
+        <th scope="row"><%= user.id %></th>
+        <td><%= user.first_name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><%= user.cellphone %></td>
+        <td><%= user.address %></td>
+      </tr>
+    <% end %>
   </tbody>
-  <% end %>
 </table>
 </div>
 
