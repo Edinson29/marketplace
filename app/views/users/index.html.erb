@@ -12,13 +12,13 @@
   </thead>
   <tbody>
     <% @users.each do |user| %>
-      <tr>
+      <tr class="body-table">
         <th scope="row"><%= user.id %></th>
-        <td><%= user.first_name %></td>
-        <td><%= user.last_name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.cellphone %></td>
-        <td><%= user.address %></td>
+        <td><%= link_to user.first_name, user_path(user), class: 'link' %></td>
+        <td><%= link_to user.last_name, user_path(user), class: 'link' %></td>
+        <td><%= link_to user.email, user_path(user), class: 'link' %></td>
+        <td><%= link_to user.cellphone, user_path(user), class: 'link' %></td>
+        <td><%= link_to user.address, user_path(user), class: 'link' %></td>
       </tr>
     <% end %>
   </tbody>
