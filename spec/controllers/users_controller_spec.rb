@@ -7,6 +7,16 @@ RSpec.describe UsersController, type: :controller do
       get :index
       expect(response).to have_http_status(:success)
     end
+
+    it "assigns an instance @users with a index User" do
+      get :index
+      expect(controller.instance_variable_get(:@users)).to eq(User.all)
+    end
+
+    it "renders with index view" do
+      get :index
+      expect(response).to render_template("users/index")
+    end
   end
 
   describe "GET #new" do
@@ -15,7 +25,7 @@ RSpec.describe UsersController, type: :controller do
       expect(response).to have_http_status(200)
     end
 
-    it "responds with view new" do
+    it "responds with new view" do
       get :new
       expect(response).to render_template("users/new")
     end
