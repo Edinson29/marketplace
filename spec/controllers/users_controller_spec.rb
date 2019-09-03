@@ -76,4 +76,56 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "GET #show" do
+    it 'returns http success' do
+      user = create(:user)
+      get :show, params: { id: user.id }
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders with show view" do
+      user = create(:user)
+      get :show, params: { id: user.id }
+      expect(response).to render_template("users/show")
+    end
+
+    it "assigns an instance @user with a show User" do
+      user = create(:user)
+      get :show, params: { id: user.id }
+      expect(controller.instance_variable_get(:@user)).to eq(user)
+    end
+
+    context "should render the user elements"do
+      it "should render the first_name" do
+        user = create(:user, first_name: 'Ricardito')
+        get :show, params: { id: user.id }
+        expect(controller.instance_variable_get(:@user)).to have_attributes(first_name: 'Ricardito')
+      end
+
+      it "should render the last_name" do
+        user = create(:user, last_name: 'Perez')
+        get :show, params: { id: user.id }
+        expect(controller.instance_variable_get(:@user)).to have_attributes(last_name: 'Perez')
+      end
+
+      it "should render the email" do
+        user = create(:user, email: 'theone@koombea.com')
+        get :show, params: { id: user.id }
+        expect(controller.instance_variable_get(:@user)).to have_attributes(email: 'theone@koombea.com')
+      end
+
+      it "should render the cellphone" do
+        user = create(:user, cellphone: 5553092)
+        get :show, params: { id: user.id }
+        expect(controller.instance_variable_get(:@user)).to have_attributes(cellphone: 5553092)
+      end
+
+      it "should render the address" do
+        user = create(:user, address: 'pivijay')
+        get :show, params: { id: user.id }
+        expect(controller.instance_variable_get(:@user)).to have_attributes(address: 'pivijay')
+      end
+    end
+  end
 end
