@@ -17,6 +17,10 @@ gem 'uglifier', '>= 1.3.0'
 # Gems added during the project
 gem 'pg', '~> 1.1', '>= 1.1.4'
 gem 'rubocop', '~> 0.74.0'
+gem 'bootstrap', '~> 4.3.1'
+gem 'jquery-rails', '~> 4.3'
+gem 'popper_js', '~> 1.14'
+gem 'faker', '~> 2.2'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
@@ -43,6 +47,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 
   gem 'rspec-rails', '~> 3.8'
+  gem 'rails-controller-testing', '1.0.4'
 end
 
 group :development do
