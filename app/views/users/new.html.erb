@@ -39,7 +39,8 @@
           <%= form.label :address %><br>
           <%= form.text_field :address, class: 'form-control', placeholder: 'Address' %>
         </div>
-        <%= form.submit 'Submit', class: 'btn btn-primary' %>
+        <%= link_to 'Back to user list', users_path, class: 'btn btn-secondary' %>
+        <%= form.submit 'Submit', class: 'btn btn-primary float-right' %>
       <%end%>
     </div>
     <div class="col-lg-4"></div>
