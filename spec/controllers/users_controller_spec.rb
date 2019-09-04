@@ -10,7 +10,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "assigns an instance @users with a index User" do
       get :index
-      expect(controller.instance_variable_get(:@users)).to eq(User.all.sort)
+      expect(controller.instance_variable_get(:@users)).to eq(User.order("id ASC"))
     end
 
     it "renders with index view" do
@@ -125,7 +125,7 @@ RSpec.describe UsersController, type: :controller do
       expect(controller.instance_variable_get(:@user)).to have_attributes(first_name: 'Fabio', last_name: 'Altamar', email: 'falata@gmail.com', cellphone: 56890, address: 'Villa Campestre')
     end
 
-    it "redirects to @user" do
+    it "redirects to @user with valid first_name parameter" do
       put :update, params: { id: @user.id, user: { first_name: 'Eugenio' } }
       expect(response).to redirect_to user_path(@user)
     end
