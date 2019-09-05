@@ -10,7 +10,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "assigns an instance @users with a index User" do
       get :index
-      expect(controller.instance_variable_get(:@users)).to eq(User.all)
+      expect(controller.instance_variable_get(:@users)).to eq(User.order("id ASC"))
     end
 
     it "renders with index view" do
@@ -94,6 +94,57 @@ RSpec.describe UsersController, type: :controller do
       user = create(:user)
       get :show, params: { id: user.id }
       expect(controller.instance_variable_get(:@user)).to eq(user)
+    end
+  end
+
+  describe "GET #edit" do
+    before do
+      @user = create(:user)
+      get :edit, params: { id: @user.id }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders to the edit view" do
+      expect(response).to render_template("users/edit")
+    end
+    it "assigns an instance @user to a edit User" do
+      expect(controller.instance_variable_get(:@user)).to eq(@user)
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      @user = create(:user)
+    end
+
+    it "validates updated parameters" do
+      put :update, params: { id: @user.id, user: { first_name: 'Fabio', last_name: 'Altamar', email: 'falata@gmail.com', cellphone: 56890, address: 'Villa Campestre' } }
+      expect(controller.instance_variable_get(:@user)).to have_attributes(first_name: 'Fabio', last_name: 'Altamar', email: 'falata@gmail.com', cellphone: 56890, address: 'Villa Campestre')
+    end
+
+    it "redirects to @user with valid first_name parameter" do
+      put :update, params: { id: @user.id, user: { first_name: 'Eugenio' } }
+      expect(response).to redirect_to user_path(@user)
+    end
+
+    context "renders to the edit view for invalid parameters" do
+      it "renders for first_name empty" do
+        put :update, params: { id: @user.id, user: { first_name: '' } }
+        expect(response).to render_template("users/edit")
+      end
+
+      it "renders for last_name empty" do
+        put :update, params: { id: @user.id, user: { last_name: '' } }
+        expect(response).to render_template("users/edit")
+      end
+
+      it "renders for email empty" do
+        put :update, params: { id: @user.id, user: { email: '' } }
+        expect(response).to render_template("users/edit")
+      end
     end
   end
 end

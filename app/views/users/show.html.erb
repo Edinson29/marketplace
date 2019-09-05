@@ -8,6 +8,7 @@
       <th scope="col">Email</th>
       <th scope="col">Cellphone</th>
       <th scope="col">Address</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -18,8 +19,9 @@
       <td><%= @user.email %></td>
       <td><%= @user.cellphone %></td>
       <td><%= @user.address %></td>
+      <td><%= link_to 'Edit', edit_user_path(@user), class: 'text-success edit' %></td>
     </tr>
   </tbody>
 </table>
 </div>
-<%= link_to 'Back', users_path, class: "ml-3" %>
+<%= link_to 'Back to list user', users_path, class: 'btn btn-secondary ml-3' %>

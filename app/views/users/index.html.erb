@@ -1,5 +1,9 @@
-<div class="container mt-4">
-  <table class="table table-striped">
+<div class="container">
+  <div class="fixed-top text-center div-new-user bg-primary mx-auto">
+    <%= link_to 'New User', new_user_path(@user), class: 'text-white new-user' %>
+    <i class="fas fa-plus fa-1x pt-1 text-center"></i>
+  </div>
+  <table class="table table-striped mt-5">
   <thead>
     <tr>
       <th scope="col">#</th>
@@ -8,6 +12,7 @@
       <th scope="col">Email</th>
       <th scope="col">Cellphone</th>
       <th scope="col">Address</th>
+      <th scope="col">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -19,6 +24,7 @@
         <td><%= link_to user.email, user_path(user), class: 'link' %></td>
         <td><%= link_to user.cellphone, user_path(user), class: 'link' %></td>
         <td><%= link_to user.address, user_path(user), class: 'link' %></td>
+        <td><%= link_to 'Edit', edit_user_path(user), class: 'text-success edit' %></td>
       </tr>
     <% end %>
   </tbody>
