@@ -1,19 +1,17 @@
 <div class="row mt-5">
   <div class="col-lg-4">
-    <%= form_with model: (@user), local: true do |form| %>
-      <% if @user.errors.any? %>
-        <div id="error_explanation" class="alert alert-danger">
-          <h3>
-            <%= pluralize(@user.errors.count, "error") %> prohibited
-            this article from being saved:
-          </h3>
-          <ul>
-            <% @user.errors.full_messages.each do |msg| %>
-              <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+    <% if @user.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h3>
+          <%= pluralize(@user.errors.count, "error") %> prohibited
+          this article from being saved:
+        </h3>
+        <ul>
+          <% @user.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
     <% end %>
   </div>
   <div class="col-lg-4">
