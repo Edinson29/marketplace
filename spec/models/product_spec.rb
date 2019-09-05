@@ -2,7 +2,8 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   it "is valid with valid attributes" do
-    expect(build(:product)).to be_valid
+    user = create(:user)
+    expect(build(:product, user_id: user.id)).to be_valid
   end
 
   context "validate the presence of the parameters" do
@@ -14,4 +15,6 @@ RSpec.describe Product, type: :model do
 
     it { should validate_presence_of(:price) }
   end
+
+  it { should belong_to(:user) }
 end
