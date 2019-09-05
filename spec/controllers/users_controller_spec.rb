@@ -147,4 +147,20 @@ RSpec.describe UsersController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @user = create(:user)
+    end
+
+    it "redirects to users_path" do
+      delete :destroy, params: { id: @user.id }
+      expect(response).to redirect_to users_path
+    end
+
+    it "is not include the deleted user" do
+      delete :destroy, params: { id: @user.id }
+      expect(controller.instance_variable_get(:@users)).not_to match(@user)
+    end
+  end
 end
