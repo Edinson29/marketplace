@@ -160,7 +160,7 @@ RSpec.describe UsersController, type: :controller do
 
     it "is not include the deleted user" do
       delete :destroy, params: { id: @user.id }
-      expect(controller.instance_variable_get(:@users)).not_to match(@user)
+      expect(User.all).not_to include(@user)
     end
   end
 end
