@@ -12,7 +12,7 @@
       <th scope="col">Email</th>
       <th scope="col">Cellphone</th>
       <th scope="col">Address</th>
-      <th scope="col">Actions</th>
+      <th scope="col" colspan="2">Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -25,6 +25,7 @@
         <td><%= link_to user.cellphone, user_path(user), class: 'link' %></td>
         <td><%= link_to user.address, user_path(user), class: 'link' %></td>
         <td><%= link_to 'Edit', edit_user_path(user), class: 'text-success edit' %></td>
+        <td><%= link_to 'Delete', user_path(user), method: :delete, class: 'text-danger delete' %></td>
       </tr>
     <% end %>
   </tbody>
