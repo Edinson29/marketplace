@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :user do
+  factory user = :user do
     first_name { 'Joe' }
     last_name { 'Monroy' }
     sequence(:email) { |n| "blah#{n}@gmail.com" }
@@ -12,5 +12,6 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
     quantity { Faker::Number.number(digits: 1) }
     price { Faker::Number.decimal(l_digits: 3, r_digits: 3) }
+    association :user, factory: [:user]
   end
 end

@@ -2,8 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Product, type: :model do
   it "is valid with valid attributes" do
-    user = create(:user)
-    expect(build(:product, user_id: user.id)).to be_valid
+    expect(build(:product)).to be_valid
   end
 
   context "validate the presence of the parameters" do
