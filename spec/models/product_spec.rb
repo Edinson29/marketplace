@@ -14,4 +14,6 @@ RSpec.describe Product, type: :model do
 
     it { should validate_presence_of(:price) }
   end
+
+  it { should belong_to(:user) }
 end

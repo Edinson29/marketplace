@@ -12,5 +12,6 @@ FactoryBot.define do
     description { Faker::Lorem.sentence }
     quantity { Faker::Number.number(digits: 1) }
     price { Faker::Number.decimal(l_digits: 3, r_digits: 3) }
+    user
   end
 end
