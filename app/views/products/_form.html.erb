@@ -35,11 +35,7 @@
       <div class="form-group">
         <%= form.label :user_id %>
         <% user = User.all %>
-        <%= form.select(:user_id) do %>
-          <% user.each do |u| %>
-            <%= content_tag(:option, "#{u.first_name} #{u.last_name}", value: u.id) %>
-          <% end %>
-        <% end %>
+        <%= form.select(:user_id, options_from_collection_for_select(user, 'id', 'name')) %>
       </div>
       <%= link_to 'Back to product list', products_path, class: 'btn btn-secondary' %>
       <%= form.submit 'Submit', class: 'btn btn-primary float-right' %>
