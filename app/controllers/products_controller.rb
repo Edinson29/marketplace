@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
 
   def create
     @product = Product.new(product_params)
-    @product.save ? redirect_to @product : render 'new'
+    @product.save ? redirect_to(@product) : render('new')
   end
 
   private
