@@ -12,11 +12,11 @@
     <tbody>
       <% @products.each do |product| %>
         <tr>
-          <th scope="row"><%= product.id %></th>
-          <td><%= product.name%></td>
-          <td><%= product.description%></td>
-          <td><%= product.quantity%></td>
-          <td><%= product.price%></td>
+          <th scope="row"><%= link_to product.id, product_path(product), class: 'link' %></th>
+          <td><%= link_to product.name, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.description, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.quantity, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.price, product_path(product), class: 'link' %></td>
         </tr>
       <% end %>
     </tbody>
