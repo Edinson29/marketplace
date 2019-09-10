@@ -16,4 +16,10 @@ RSpec.describe Product, type: :model do
   end
 
   it { should belong_to(:user) }
+
+  context "validate the product state" do
+    it "validates unpublished status by default" do
+      expect(build(:product)).to have_attributes(status: 'unpublished')
+    end
+  end
 end
