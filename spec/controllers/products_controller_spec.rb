@@ -38,9 +38,11 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST #create" do
-    it "return 302" do
-      post :create, params: { product: { name: 'kiwi', description: 'Producto muy poco conocido', quantity: 2, price: 6000, user_id: 3 } }
-      expect(response).to have_http_status(302)
+    context "When @product.save is true" do
+      it "return 302" do
+        post :create, params: { product: { name: 'kiwi', description: 'Producto muy poco conocido', quantity: 2, price: 6000, user_id: 3 } }
+        expect(response).to have_http_status(302)
+      end
     end
 
     context "when @product.save is false" do
