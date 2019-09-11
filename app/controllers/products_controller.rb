@@ -21,6 +21,11 @@ class ProductsController < ApplicationController
     @product.update(product_params) ? redirect_to(@product) : render('edit')
   end
 
+  def destroy
+    @product.delete
+    redirect_to products_path
+  end
+
   private
 
   def set_product
