@@ -10,7 +10,7 @@ RSpec.describe ProductsController, type: :controller do
 
     it "assigns an instance @users with a index User" do
       get :index
-      expect(controller.instance_variable_get(:@products)).to eq(Product.order("id ASC"))
+      expect(controller.instance_variable_get(:@products)).to eq(Product.published)
     end
 
     it "renders with index view" do
