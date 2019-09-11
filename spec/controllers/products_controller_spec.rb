@@ -101,4 +101,61 @@ RSpec.describe ProductsController, type: :controller do
       expect(controller.instance_variable_get(:@product)).to eq(@product)
     end
   end
+
+  describe "GET #edit" do
+    before do
+      @product = create(:product)
+      get :edit, params: { id: @product.id }
+    end
+
+    it "returns http success" do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders to the edit view" do
+      expect(response).to render_template("products/edit")
+    end
+
+    it "assigns an instance @product to a edit Product" do
+      expect(controller.instance_variable_get(:@product)).to eq(@product)
+    end
+  end
+
+  describe "PUT #update" do
+    before do
+      @product = create(:product)
+    end
+
+    it "validates updated parameters" do
+      put :update, params: { id: @product.id, product: { name: 'Brocoli', description: 'Saludable y bueno para la cara', quantity: 6, price: 5680 } }
+      expect(controller.instance_variable_get(:@product)).to have_attributes(name: 'Brocoli', description: 'Saludable y bueno para la cara', quantity: 6, price: 5680)
+    end
+
+    it "redirects to @product with valid first_name parameter" do
+      put :update, params: { id: @product.id, product: { name: 'Atun' } }
+      expect(response).to redirect_to product_path(@product)
+    end
+
+    context "renders to the edit view for invalid parameters" do
+      it "renders for name empty" do
+        put :update, params: { id: @product.id, product: { name: '' } }
+        expect(response).to render_template("products/edit")
+      end
+
+      it "renders for description empty" do
+        put :update, params: { id: @product.id, product: { description: '' } }
+        expect(response).to render_template("products/edit")
+      end
+
+      it "renders for quantity empty" do
+        put :update, params: { id: @product.id, product: { quantity: '' } }
+        expect(response).to render_template("products/edit")
+      end
+
+      it "renders for price empty" do
+        put :update, params: { id: @product.id, product: { price: '' } }
+        expect(response).to render_template("products/edit")
+      end
+    end
+  end
 end
