@@ -158,4 +158,19 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe "DELETE #destroy" do
+    before do
+      @product = create(:product)
+      delete :destroy, params: { id: @product.id }
+    end
+
+    it "redirects to products_path" do
+      expect(response).to redirect_to products_path
+    end
+
+    it "is not include the deleted user" do
+      expect(Product.all).not_to include(@product)
+    end
+  end
 end
