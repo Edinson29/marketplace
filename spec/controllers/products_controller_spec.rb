@@ -75,4 +75,22 @@ RSpec.describe ProductsController, type: :controller do
       end
     end
   end
+
+  describe "GET #show" do
+    before do
+      @product = create(:product)
+      get :show, params: { id: @product.id }
+    end
+    it 'returns http success' do
+      expect(response).to have_http_status(:success)
+    end
+
+    it "renders with show view" do
+      expect(response).to render_template("products/show")
+    end
+
+    it "assigns an instance @product with a show Product" do
+      expect(controller.instance_variable_get(:@product)).to eq(@product)
+    end
+  end
 end

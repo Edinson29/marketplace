@@ -12,6 +12,10 @@ class ProductsController < ApplicationController
     @product.save ? redirect_to(@product) : render('new')
   end
 
+  def show
+    @product = Product.find(params[:id])
+  end
+
   private
 
   def product_params
