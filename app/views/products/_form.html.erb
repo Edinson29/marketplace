@@ -37,6 +37,14 @@
         <% user = User.all %>
         <%= form.select(:user_id, options_from_collection_for_select(user, 'id', 'name')) %>
       </div>
+      <div class="field">
+        <%= form.fields_for :images do |images_form| %>
+          <%= render 'image_fields', f: images_form %>
+        <% end %>
+        <div class='links'>
+          <%= link_to_add_association 'add image', form, :images %>
+        </div>
+      </div>
       <%= link_to 'Back to product list', products_path, class: 'btn btn-secondary' %>
       <%= form.submit 'Submit', class: 'btn btn-primary float-right' %>
     <%end%>

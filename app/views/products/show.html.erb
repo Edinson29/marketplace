@@ -22,4 +22,11 @@
       </tr>
     </tbody>
   </table>
+  <div class="images text-center">
+    <h3 class="text-center text-success">Images</h3>
+    <% @product.images.each do |image| %>
+      <%= image_tag(url_for(image.avatar), size: '300x300',) %>
+    <% end %>
+  </div>
 </div>
+
