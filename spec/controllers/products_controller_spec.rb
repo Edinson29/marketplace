@@ -82,6 +82,14 @@ RSpec.describe ProductsController, type: :controller do
         expect(User.last.created_at.to_date).not_to eq(date)
       end
     end
+
+    it 'attaches the upload file' do
+      file = fixture_file_upload(Rails.root.join('/Users/edinson/Desktop/', 'Screen Shot 2019-07-08 at 5.34.17 PM.png'), 'image/png')
+      user = create(:user)
+      expect {
+        post :create, params: { product: { name: 'Guanabana', description: 'No es de gusto de todos', quantity: '1', price: 8989, user_id: user.id, images_attributes: [ { avatar: file } ]  } }
+      }.to change(ActiveStorage::Attachment, :count).by(1)
+    end
   end
 
   describe "GET #show" do
@@ -172,5 +180,9 @@ RSpec.describe ProductsController, type: :controller do
     it "is not include the deleted user" do
       expect(Product.all).not_to include(@product)
     end
+  end
+
+  describe "set_article use" do
+    it { should use_before_action(:set_product) }
   end
 end

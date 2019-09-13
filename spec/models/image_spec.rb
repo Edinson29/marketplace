@@ -1,0 +1,7 @@
+require 'rails_helper'
+
+RSpec.describe Image, type: :model do
+  it { should belong_to(:product) }
+
+  it { should have_one(:avatar) }
+end

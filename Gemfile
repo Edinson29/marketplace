@@ -21,6 +21,7 @@ gem 'bootstrap', '~> 4.3.1'
 gem 'jquery-rails', '~> 4.3'
 gem 'popper_js', '~> 1.14'
 gem 'faker', '~> 2.2'
+gem 'cocoon', '~> 1.2', '>= 1.2.14'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'

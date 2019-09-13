@@ -17,6 +17,10 @@ RSpec.describe Product, type: :model do
 
   it { should belong_to(:user) }
 
+  it { should have_many(:images) }
+
+  it { should accept_nested_attributes_for(:images).allow_destroy(true) }
+
   context "validate the product state" do
     it "validates unpublished status by default" do
       expect(build(:product)).to have_attributes(status: 'unpublished')
