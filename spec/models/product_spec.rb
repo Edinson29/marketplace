@@ -17,6 +17,8 @@ RSpec.describe Product, type: :model do
 
   it { should belong_to(:user) }
 
+  it { should belong_to(:category) }
+
   it { should have_many(:images) }
 
   it { should accept_nested_attributes_for(:images).allow_destroy(true) }
