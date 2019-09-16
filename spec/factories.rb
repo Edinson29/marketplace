@@ -14,4 +14,8 @@ FactoryBot.define do
     price { Faker::Number.decimal(l_digits: 3, r_digits: 3) }
     user
   end
+
+  factory :category do
+    name { Faker::Team.state }
+  end
 end
