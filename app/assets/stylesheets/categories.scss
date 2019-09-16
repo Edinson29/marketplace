@@ -1,0 +1,31 @@
+thead{
+  background-color: #00b300;
+  color: #fff;
+}
+th,td{
+  border: 2px solid #fff;
+}
+.link{
+  color: #000 !important;
+}
+.div-new-user{
+  overflow: hidden;
+  width: 150px;
+  height: 40px;
+  padding-top: .375rem;
+  border-radius: 0 0 5px 5px;
+  transition: .6s;
+}
+.fa-plus{
+  color: #fff;
+}
+.new-user:hover{
+  text-decoration: none !important;
+  color: #d9d9d9 !important;
+}
+.edit:hover{
+  text-decoration: none
+}
+.delete:hover{
+  text-decoration: none;
+}

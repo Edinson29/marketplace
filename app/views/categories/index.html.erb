@@ -1,0 +1,23 @@
+<div class="container">
+  <p id="notice"><%= notice %></p>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th colspan="2">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @categories.each do |category| %>
+        <tr>
+          <td><%= link_to category.name, category_path(category), class: 'link' %></td>
+          <td><%= link_to 'Edit', edit_category_path(category), class: 'text-success edit' %>
+          <td><%= link_to 'Delete', category_path(category), method: :delete, class: 'text-danger delete' %></td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to 'New Category', new_category_path(@category) %>
+</div>
+
