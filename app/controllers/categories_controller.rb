@@ -22,7 +22,8 @@ class CategoriesController < ApplicationController
   end
 
   def destroy
-    @category.destroy
+    @category.delete
+    redirect_to categories_path
   end
 
   private
