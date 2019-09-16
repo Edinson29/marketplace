@@ -1,6 +1,7 @@
 class Product < ApplicationRecord
   enum status: %i[unpublished archived published]
   belongs_to :user
+  belongs_to :category
   has_many :images, inverse_of: :product, dependent: :destroy
   validates :name, presence: true
   validates :description, presence: true
