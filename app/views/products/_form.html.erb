@@ -37,6 +37,11 @@
         <% user = User.all %>
         <%= form.select(:user_id, options_from_collection_for_select(user, 'id', 'name')) %>
       </div>
+      <div class="form-group">
+        <%= form.label :category %>
+        <% category = Category.all %>
+        <%= form.select(:category_id, options_from_collection_for_select(category, 'id', 'name')) %>
+      </div>
       <div class="field">
         <%= form.fields_for :images do |images_form| %>
           <%= render 'image_fields', f: images_form %>
