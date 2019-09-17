@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index, :new, :create]
+  before_action :authenticate_user!
 
   def index
     @users = User.order("id ASC")
@@ -44,6 +45,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address)
+    params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address, :password, :password_confirmation)
   end
 end
