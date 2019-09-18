@@ -166,7 +166,14 @@ RSpec.describe UsersController, type: :controller do
     end
   end
 
-  it "should have a current_user" do
+  it "has a current user" do
     expect(subject.current_user).not_to eq(nil)
+  end
+
+  describe "validating with logout_user" do
+    logout_user
+    it "should have a current_user" do
+      expect(subject.current_user).to eq(nil)
+    end
   end
 end
