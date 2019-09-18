@@ -184,7 +184,9 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe "set_article use" do
+  describe "validating before action" do
     it { should use_before_action(:set_product) }
+
+    it { should use_before_action(:authenticate_user!) }
   end
 end
