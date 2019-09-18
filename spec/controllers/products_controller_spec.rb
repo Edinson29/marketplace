@@ -27,7 +27,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #new" do
-    login_user
     before do
       get :new
     end
@@ -46,7 +45,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "POST #create" do
-    login_user
     context "When @product.save is true" do
       it "return 302" do
         post :create, params: { product: { name: 'kiwi', description: 'Producto muy poco conocido', quantity: 2, price: 6000, user_id: 3, category_id: 2 } }
@@ -94,7 +92,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #show" do
-    login_user
     before do
       @product = create(:product)
       get :show, params: { id: @product.id }
@@ -113,7 +110,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "GET #edit" do
-    login_user
     before do
       @product = create(:product)
       get :edit, params: { id: @product.id }
@@ -133,7 +129,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "PUT #update" do
-    login_user
     before do
       @product = create(:product)
     end
@@ -172,7 +167,6 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    login_user
     before do
       @product = create(:product)
       delete :destroy, params: { id: @product.id }
