@@ -83,7 +83,7 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it 'attaches the upload file' do
-      file = fixture_file_upload(Rails.root.join('/Users/edinson/Desktop/', 'Screen Shot 2019-07-08 at 5.34.17 PM.png'), 'image/png')
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
       user = create(:user)
       expect {
         post :create, params: { product: { name: 'Guanabana', description: 'No es de gusto de todos', quantity: '1', price: 8989, user_id: user.id, category_id: 2, images_attributes: [ { avatar: file } ]  } }
