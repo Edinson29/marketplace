@@ -1,37 +1,39 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-
+  login_user
   describe "GET #index" do
-    it "returns http success" do
+    before do
       get :index
+    end
+
+    it "returns http success" do
       expect(response).to have_http_status(:success)
     end
 
     it "assigns an instance @users with a index User" do
-      get :index
       expect(controller.instance_variable_get(:@users)).to eq(User.order("id ASC"))
     end
 
     it "renders with index view" do
-      get :index
-      expect(response).to render_template("users/index")
+      expect(response).to render_template("index")
     end
   end
 
   describe "GET #new" do
-    it "responds with 200" do
+    before do
       get :new
+    end
+
+    it "responds with 200" do
       expect(response).to have_http_status(200)
     end
 
     it "responds with new view" do
-      get :new
-      expect(response).to render_template("users/new")
+      expect(response).to render_template("new")
     end
 
     it "assigns an instance @user with a new User" do
-      get :new
       expect(controller.instance_variable_get(:@user)).to be_a_new(User)
     end
   end
@@ -39,12 +41,12 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context 'when @user.save is true' do
       it "returns 302" do
-        post :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', cellphone: 3265565, address: 'chinita' } }
+        post :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', password: '98765432', password_confirmation: '98765432', cellphone: 3265565, address: 'chinita' } }
         expect(response).to have_http_status(302)
       end
 
-      it "redirects to @user" do
-        post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'vidachevere@gmail.com', cellphone: 3568545, address: 'ciudadela' } }
+      it "redirects to users" do
+        post :create, params: { user: { first_name: 'efrain', last_name: 'castro', email: 'vidachevere@gmail.com', password: '12345678', password_confirmation: '12345678', cellphone: 3568545, address: 'ciudadela' } }
         expect(response).to redirect_to user_path(User.find_by(email: 'vidachevere@gmail.com'))
       end
     end
@@ -161,6 +163,17 @@ RSpec.describe UsersController, type: :controller do
     it "is not include the deleted user" do
       delete :destroy, params: { id: @user.id }
       expect(User.all).not_to include(@user)
+    end
+  end
+
+  it "has a current user" do
+    expect(subject.current_user).not_to eq(nil)
+  end
+
+  describe "validating with logout_user" do
+    logout_user
+    it "should have a current_user" do
+      expect(subject.current_user).to eq(nil)
     end
   end
 end

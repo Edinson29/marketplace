@@ -1,9 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe ProductsController, type: :controller do
-
+  login_user
   describe "GET #index" do
-
     before do
       get :index
     end
@@ -48,7 +47,9 @@ RSpec.describe ProductsController, type: :controller do
   describe "POST #create" do
     context "When @product.save is true" do
       it "return 302" do
-        post :create, params: { product: { name: 'kiwi', description: 'Producto muy poco conocido', quantity: 2, price: 6000, user_id: 3, category_id: 2 } }
+        user = create(:user)
+        category = create(:category)
+        post :create, params: { product: { name: 'kiwi', description: 'Producto muy poco conocido', quantity: 2, price: 6000, user_id: user.id, category_id: category.id } }
         expect(response).to have_http_status(302)
       end
     end
@@ -84,10 +85,11 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it 'attaches the upload file' do
-      file = fixture_file_upload(Rails.root.join('/Users/edinson/Desktop/', 'Screen Shot 2019-07-08 at 5.34.17 PM.png'), 'image/png')
+      file = fixture_file_upload(Rails.root.join('public', 'apple-touch-icon.png'), 'image/png')
       user = create(:user)
+      category = create(:category)
       expect {
-        post :create, params: { product: { name: 'Guanabana', description: 'No es de gusto de todos', quantity: '1', price: 8989, user_id: user.id, category_id: 2, images_attributes: [ { avatar: file } ]  } }
+        post :create, params: { product: { name: 'Guanabana', description: 'No es de gusto de todos', quantity: '1', price: 8989, user_id: user.id, category_id: category.id, images_attributes: [ { avatar: file } ]  } }
       }.to change(ActiveStorage::Attachment, :count).by(1)
     end
   end

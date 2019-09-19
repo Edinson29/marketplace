@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, except: [:index, :new, :create]
+  before_action :authenticate_user!
 
   def index
     @users = User.order("id ASC")
@@ -9,8 +10,7 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @user = User.new(user_params)
@@ -29,8 +29,7 @@ class UsersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def destroy
     @user.delete
@@ -44,6 +43,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address)
+    params.require(:user).permit(:first_name, :last_name, :email, :cellphone, :address, :password, :password_confirmation)
   end
 end
