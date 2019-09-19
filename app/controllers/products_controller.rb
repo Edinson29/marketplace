@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
-  before_action :set_product, except: [:index, :new, :create]
-  before_action :authenticate_user!
+  before_action :set_product, except: %i[index new create]
+  before_action :authenticate_user!, except: %i[index show]
   def index
     @products = Product.published
   end
