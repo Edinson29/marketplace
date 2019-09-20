@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, except: %i[index new create]
+  before_action :set_product, except: %i[index new create my_products]
   before_action :authenticate_user!, except: %i[index show]
   def index
     @products = Product.published
@@ -22,9 +22,23 @@ class ProductsController < ApplicationController
     @product.update(product_params) ? redirect_to(@product) : render('edit')
   end
 
-  def destroy
-    @product.delete
-    redirect_to products_path
+  def archived
+    @product.archived!
+    redirect_to my_products_path
+  end
+
+  def my_products
+    @my_products = Product.all
+  end
+
+  def publish
+    @product.published!
+    redirect_to my_products_path
+  end
+
+  def unpublish
+    @product.unpublished!
+    redirect_to my_products_path
   end
 
   private
