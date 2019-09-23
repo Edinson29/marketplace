@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="fixed-top text-center div-new-user bg-primary mx-auto">
+    <%= link_to 'New Product', new_product_path, class: 'text-white new-user' %>
+    <i class="fas fa-plus fa-1x pt-1 text-center"></i>
+  </div>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Quantity</th>
+        <th scope="col">Price</th>
+        <th scope="col">Status</th>
+        <th colspan="3">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @my_products.each do |product| %>
+        <tr>
+          <th scope="row"><%= link_to product.id, product_path(product), class: 'link' %></th>
+          <td><%= link_to product.name, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.description, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.quantity, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.price, product_path(product), class: 'link' %></td>
+          <td><%= link_to product.status.capitalize, product_path(product), class: 'link' %></td>
+          <% if product.published? %>
+            <td><%= link_to 'Unpublish', "/products/#{product.id}/unpublish", method: :put, class: 'brown' %></td>
+          <% else %>
+            <td><%= link_to 'Publish', "/products/#{product.id}/publish", method: :put, class: 'publish' %></td>
+          <% end %>
+          <td><%= link_to 'Edit', edit_product_path(product), class: 'text-success edit' %></td>
+          <td><%= link_to 'Delete', "/products/#{product.id}/archived", method: :put, class: 'text-danger delete' %></td>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
