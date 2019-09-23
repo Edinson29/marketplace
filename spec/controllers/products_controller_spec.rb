@@ -169,18 +169,75 @@ RSpec.describe ProductsController, type: :controller do
     end
   end
 
-  describe "DELETE #destroy" do
+  describe "my products" do
     before do
       @product = create(:product)
-      delete :destroy, params: { id: @product.id }
+      get :my_products
     end
 
-    it "redirects to products_path" do
-      expect(response).to redirect_to products_path
+    it "renders to my_products_path" do
+      expect(response).to render_template 'my_products'
     end
 
-    it "is not include the deleted user" do
-      expect(Product.all).not_to include(@product)
+    it "assigns an instance @my_products to a my_products Product" do
+      expect(controller.instance_variable_get(:@my_products)).not_to eq(@product)
+    end
+  end
+
+  describe "PUT #archived" do
+    before do
+      @product = FactoryBot.create(:product)
+      put :archived, params: { id: @product.id }
+    end
+
+    it "changes to the archived status" do
+      expect(Product.find_by(id: @product.id)).to have_attributes(status: 'archived')
+    end
+
+    it "renders to my_products" do
+      expect(response).to redirect_to my_products_path
+    end
+
+    it "responds with 302" do
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe "PUT #publish" do
+    before do
+      @product = FactoryBot.create(:product)
+      put :publish, params: { id: @product.id }
+    end
+
+    it "changes to the archived status" do
+      expect(Product.find_by(id: @product.id)).to have_attributes(status: 'published')
+    end
+
+    it "renders to my_products" do
+      expect(response).to redirect_to my_products_path
+    end
+
+    it "responds with 302" do
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe "PUT #publish" do
+    before do
+      @product = FactoryBot.create(:product)
+      put :unpublish, params: { id: @product.id }
+    end
+
+    it "changes to the archived status" do
+      expect(Product.find_by(id: @product.id)).to have_attributes(status: 'unpublished')
+    end
+
+    it "renders to my_products" do
+      expect(response).to redirect_to my_products_path
+    end
+
+    it "responds with 302" do
+      expect(response).to have_http_status(302)
     end
   end
 
