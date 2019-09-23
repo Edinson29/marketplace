@@ -180,7 +180,13 @@ RSpec.describe ProductsController, type: :controller do
     end
 
     it "assigns an instance @my_products to a my_products Product" do
-      expect(controller.instance_variable_get(:@my_products)).not_to eq(@product)
+      expect(controller.instance_variable_get(:@my_products)).not_to match(@product)
+    end
+
+    it "is not include products other than the current user"  do
+      user2 = create(:user)
+      product2 = create(:product, user_id: user2.id)
+      expect(response).not_to include(product2)
     end
   end
 

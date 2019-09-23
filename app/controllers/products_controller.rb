@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
   end
 
   def my_products
-    @my_products = Product.all
+    @my_products = Product.where(user_id: current_user.id)
   end
 
   def publish
