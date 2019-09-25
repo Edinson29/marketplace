@@ -28,4 +28,16 @@ RSpec.describe Product, type: :model do
       expect(build(:product)).to have_attributes(status: 'unpublished')
     end
   end
+
+  it { should callback(:send_email).after(:update).if(:change_to_published) }
+
+  describe "methods" do
+    it "sends email to all users" do
+      expect { subject.send(:send_email) }.to change(ActionMailer::Base.deliveries, :count).by(User.all.length)
+    end
+
+    it "returns a real value" do
+      expect(subject.send(:change_to_published)).to be_truthy
+    end
+  end
 end
