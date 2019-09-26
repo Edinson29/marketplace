@@ -50,6 +50,7 @@ group :development, :test do
 
   gem 'rspec-rails', '~> 3.8'
   gem 'rails-controller-testing', '1.0.4'
+  gem 'letter_opener', '~> 1.7'
 end
 
 group :development do
@@ -71,6 +72,7 @@ group :test do
   gem 'simplecov', require: false
   gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
   gem 'shoulda-matchers', '~> 4.1', '>= 4.1.2'
+  gem 'shoulda-callback-matchers', '~> 1.1', '>= 1.1.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
