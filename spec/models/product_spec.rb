@@ -29,15 +29,24 @@ RSpec.describe Product, type: :model do
     end
   end
 
-  it { should callback(:send_email).after(:update).if(:change_to_published) }
+  it { should callback(:send_email).after(:save).if(:change_to_published) }
 
-  describe "methods" do
-    it "sends email to all users" do
-      expect { subject.send(:send_email) }.to change(ActionMailer::Base.deliveries, :count).by(User.all.length)
+  describe "send email" do
+    before do
+      @user = create(:user)
+      @category = create(:category)
     end
 
-    it "returns a real value" do
-      expect(subject.send(:change_to_published)).to be_truthy
+    it "sends email to the users" do
+      expect {
+        create(:product, status: 'published', user_id: @user.id, category_id: @category.id)
+      }.to change(ActionMailer::Base.deliveries, :count).by(User.all.length)
+    end
+
+    it "is not send email to users" do
+      expect {
+        create(:product, status: 'unpublished', user_id: @user.id, category_id: @category.id)
+      }.to change(ActionMailer::Base.deliveries, :count).by(0)
     end
   end
 end
