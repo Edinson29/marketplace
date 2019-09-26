@@ -41,14 +41,14 @@ RSpec.describe Product, type: :model do
       it "when the state is published" do
         expect {
           create(:product, status: 'published', user_id: @user.id, category_id: @category.id)
-        }.to change(ActionMailer::Base.deliveries, :count).by(User.all.length)
+        }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
 
       it "when update the status to publish" do
         product = create(:product, user_id: @user.id, category_id: @category.id)
         expect {
           product.published!
-        }.to change(ActionMailer::Base.deliveries, :count).by(User.all.length)
+        }.to change(ActionMailer::Base.deliveries, :count).by(1)
       end
     end
 
