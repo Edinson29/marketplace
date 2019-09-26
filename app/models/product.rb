@@ -17,7 +17,7 @@ class Product < ApplicationRecord
   end
 
   def send_email
-    User.all.each do |user|
+    User.find_each do |user|
       ProductMailer.published_product(user, self).deliver_now
     end
   end
