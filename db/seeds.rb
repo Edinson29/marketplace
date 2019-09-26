@@ -6,20 +6,4 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
-
-15.times do
-  user = User.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
-    email: Faker::Internet.email,
-    cellphone: Faker::Number.number(digits: 10),
-    address: Faker::Address.city
-  )
-  Product.create(
-    name: Faker::Food.vegetables,
-    description: Faker::Lorem.sentence,
-    quantity: Faker::Number.number(digits: 1),
-    price: Faker::Number.decimal(l_digits: 3, r_digits: 3),
-    user_id: user.id
-  )
-end
+AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
