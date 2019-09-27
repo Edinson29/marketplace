@@ -21,11 +21,5 @@ RSpec.describe User, type: :model do
     expect(user2).to_not be_valid
   end
 
-  it "has a unique email" do
-    user = create(:user)
-    user2 = build(:user, email: user.email)
-    expect(user2).to_not be_valid
-  end
-
   it { should have_many(:products) }
 end
