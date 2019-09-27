@@ -27,5 +27,9 @@ RSpec.describe User, type: :model do
     expect(user2).to_not be_valid
   end
 
+  it { should validate_presence_of(:password) }
+
+  it { should validate_presence_of(:password_confirmation) }
+
   it { should have_many(:products) }
 end
