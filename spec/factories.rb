@@ -4,6 +4,7 @@ FactoryBot.define do
     last_name { 'Monroy' }
     sequence(:email) { |n| "blah#{n}@gmail.com" }
     password { 'solosolo' }
+    password_confirmation { 'solosolo' }
     cellphone { 3004585635 }
     address { 'Cra 45 #60-25' }
   end
