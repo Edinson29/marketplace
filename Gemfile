@@ -25,6 +25,7 @@ gem 'cocoon', '~> 1.2', '>= 1.2.14'
 gem 'devise', '~> 4.7', '>= 4.7.1'
 gem 'activeadmin', '~> 2.3', '>= 2.3.1'
 gem 'omniauth-google-oauth2', '~> 0.8.0'
+gem 'omniauth-facebook', '~> 5.0'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
