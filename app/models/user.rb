@@ -17,19 +17,21 @@ class User < ApplicationRecord
     user = User.where(email: data['email']).first
 
     unless user
-        user = User.create(name: data['name'],
-           email: data['email'],
-           password: Devise.friendly_token[8,20]
-        )
+      user = User.create(
+        first_name: data['first_name'],
+        last_name: data['last_name'],
+        email: data['email'],
+        password: Devise.friendly_token[8, 20]
+      )
     end
     user
   end
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
+  # def self.new_with_session(params, session)
+  #   super.tap do |user|
+  #     if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+  #       user.email = data["email"] if user.email.blank?
+  #     end
+  #   end
+  # end
 end

@@ -22,4 +22,39 @@ RSpec.describe User, type: :model do
   end
 
   it { should have_many(:products) }
+  describe "#from_omniauth" do
+    before do
+      @omniauth_google_hash = OmniAuth::AuthHash.new({
+        provider: 'facebook',
+        uid: '1234',
+        info: {
+          first_name: 'john',
+          last_name: 'doe',
+          email: 'test@example.com',
+          password: 'password'
+        }
+      })
+    end
+
+    it "retrieves an existing user" do
+      user = User.new(
+        first_name: 'jhon',
+        last_name: 'doe',
+        email: 'test@example.com',
+        cellphone: '986587456',
+        password: 'password',
+        password_confirmation: 'password',
+        address: 'koombea'
+      )
+      user.save
+      omniauth_user = User.from_omniauth(@omniauth_google_hash)
+
+      expect(user).to eq(omniauth_user)
+    end
+
+    it "creates a new user if one doesn't already exist" do
+      User.from_omniauth(@omniauth_google_hash)
+      expect(User.count).to eq(1)
+    end
+  end
 end
