@@ -43,8 +43,13 @@ Devise.setup do |config|
   # config.authentication_keys = [:email]
 
 
-  config.omniauth :google_oauth2, '935887546977-4hr8t1dmu2soqejc7kitp39t63in6uft.apps.googleusercontent.com', 'zwee4-ZsKg8d-0Zysmq_QD9W'
-  config.omniauth :facebook, "494018654509992", "ceefec38479efd3444c21ff67ac82686", callback_url: "https://99815f6d.ngrok.io/users/auth/facebook/callback"
+  config.omniauth :google_oauth2,
+                  Rails.application.credentials[Rails.env.to_sym][:google_oauth2][:client_id],
+                  Rails.application.credentials[Rails.env.to_sym][:google_oauth2][:client_secret]
+  config.omniauth :facebook,
+                  Rails.application.credentials[Rails.env.to_sym][:facebook][:app_id],
+                  Rails.application.credentials[Rails.env.to_sym][:facebook][:app_secret],
+                  callback_url: Rails.application.credentials[Rails.env.to_sym][:facebook][:callback_url]
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
   # find_for_authentication method and considered in your model lookup. For instance,
