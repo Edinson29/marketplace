@@ -45,7 +45,7 @@ RSpec.describe User, type: :model do
     end
 
     it "retrieves an existing user" do
-      user = User.new(
+      user = User.create(
         first_name: 'jhon',
         last_name: 'doe',
         email: 'test@example.com',
@@ -54,7 +54,6 @@ RSpec.describe User, type: :model do
         password_confirmation: 'password',
         address: 'koombea'
       )
-      user.save
       omniauth_user = User.from_omniauth(@omniauth_facebook_hash)
 
       expect(user).to eq(omniauth_user)
