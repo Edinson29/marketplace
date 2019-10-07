@@ -33,6 +33,15 @@ RSpec.describe User, type: :model do
           email: 'test@example.com',
         }
       })
+
+      @omniauth_name_hash = OmniAuth::AuthHash.new({
+        provider: 'facebook',
+        uid: '1234',
+        info: {
+          name: 'Cain Velasquez',
+          email: 'cvalesquez@ufc.co'
+        }
+      })
     end
 
     it "retrieves an existing user" do
@@ -54,6 +63,21 @@ RSpec.describe User, type: :model do
     it "creates a new user if one doesn't already exist" do
       User.from_omniauth(@omniauth_facebook_hash)
       expect(User.count).to eq(1)
+    end
+
+    it "creates a new user with name parameter" do
+      User.from_omniauth(@omniauth_name_hash)
+      expect(User.count).to eq(1)
+    end
+
+    it "creates first_name parameter" do
+      user = User.from_omniauth(@omniauth_name_hash)
+      expect(user).to have_attributes(first_name: 'Cain')
+    end
+
+    it "creates last_name parameter" do
+      user = User.from_omniauth(@omniauth_name_hash)
+      expect(user).to have_attributes(last_name: 'Velasquez')
     end
   end
 end
