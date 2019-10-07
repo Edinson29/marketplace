@@ -14,14 +14,22 @@ class User < ApplicationRecord
 
   def self.from_omniauth(auth)
     data = auth.info
-    User.where(email: data['email']).first
-  end
+    email = data.email
+    user = User.where(email: email).first
 
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
+    if !user && !email.blank?
+      password = Devise.friendly_token[8, 20]
+      name = data.name
+      first_name = data.first_name || name.split(' ').first
+      last_name = data.last_name || name.split(' ').last
+      user = User.create(
+        first_name: first_name,
+        last_name: last_name,
+        email: email,
+        password: password,
+        password_confirmation: password
+      )
     end
+    user
   end
 end
