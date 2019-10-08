@@ -2,8 +2,8 @@ require "rails_helper"
 RSpec.describe ProductMailer, type: :mailer do
   describe "notify" do
     before do
-      @user = build(:user)
-      @product = build(:product, user_id: @user.id)
+      @user = create(:user)
+      @product = create(:product, user_id: @user.id)
     end
 
     let(:mail) { ProductMailer.published_product(@user, @product)}
@@ -22,7 +22,7 @@ RSpec.describe ProductMailer, type: :mailer do
     end
 
     it "renders the body" do
-      expect(mail.body.encoded).to match("Hello, there is a new product published")
+      expect(mail.body.encoded).to match("Hello, the product #{@product.name} has been published")
     end
   end
 end
