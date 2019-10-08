@@ -41,7 +41,8 @@ RSpec.describe UsersController, type: :controller do
   describe "POST #create" do
     context 'when @user.save is true' do
       it "returns 302" do
-        post :create, params: { user: { first_name: 'edinson',last_name: 'gutierrez', email: 'edinsongutie@hotmail.com', password: '98765432', password_confirmation: '98765432', cellphone: 3265565, address: 'chinita' } }
+        user = attributes_for(:user)
+        post :create, params: { user: user }
         expect(response).to have_http_status(302)
       end
 

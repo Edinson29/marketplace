@@ -1,12 +1,12 @@
 FactoryBot.define do
   factory :user do
-    first_name { 'Joe' }
-    last_name { 'Monroy' }
-    sequence(:email) { |n| "blah#{n}@gmail.com" }
+    first_name { Faker::Name.first_name }
+    last_name { Faker::Name.last_name }
+    email { Faker::Internet.email }
     password { 'solosolo' }
     password_confirmation { 'solosolo' }
-    cellphone { 3004585635 }
-    address { 'Cra 45 #60-25' }
+    cellphone { Faker::Number.number(digits: 10) }
+    address { Faker::Address.city }
   end
 
   factory :product do
